@@ -1,0 +1,71 @@
+-------------------------------------------
+Batch: 1
+-------------------------------------------
++-------------------+----+------+
+|domain             |view|unique|
++-------------------+----+------+
+|www.championat.com |2   |2     |
+|nova.rambler.ru    |2   |1     |
+|yandex.ru          |2   |2     |
+|comments.rambler.ru|2   |2     |
+|news.rambler.ru    |2   |2     |
+|avia.pro           |2   |2     |
+|www.ferra.ru       |1   |1     |
+|www.cybersport.ru  |1   |1     |
+|spb.hh.ru          |1   |1     |
+|ipoteka.domclick.ru|1   |1     |
++-------------------+----+------+
+
+-------------------------------------------
+Batch: 2
+-------------------------------------------
++-------------------+----+------+
+|domain             |view|unique|
++-------------------+----+------+
+|yandex.ru          |6   |6     |
+|life.ru            |4   |4     |
+|news.rambler.ru    |4   |4     |
+|echo.msk.ru        |3   |3     |
+|www.championat.com |3   |3     |
+|comments.rambler.ru|3   |3     |
+|avia.pro           |3   |3     |
+|www.yaplakal.com   |2   |2     |
+|igroflot.ru        |2   |2     |
+|www.mk.ru          |2   |2     |
++-------------------+----+------+
+
+-------------------------------------------
+Batch: 3
+-------------------------------------------
++-----------------------------+----+------+
+|domain                       |view|unique|
++-----------------------------+----+------+
+|yandex.ru                    |6   |6     |
+|www.championat.com           |5   |5     |
+|www.rambler.ru               |5   |5     |
+|echo.msk.ru                  |4   |4     |
+|life.ru                      |4   |4     |
+|news.rambler.ru              |4   |4     |
+|m.lenta.ru                   |3   |3     |
+|www.coins-spb.ru             |3   |1     |
+|colonelcassad.livejournal.com|3   |2     |
+|www.ikea.com                 |3   |3     |
++-----------------------------+----+------+
+
+-------------------------------------------
+Batch: 4
+-------------------------------------------
++------------------+----+------+
+|domain            |view|unique|
++------------------+----+------+
+|yandex.ru         |11  |11    |
+|www.championat.com|8   |8     |
+|echo.msk.ru       |8   |8     |
+|news.rambler.ru   |8   |8     |
+|m.lenta.ru        |6   |4     |
+|life.ru           |6   |6     |
+|www.rambler.ru    |6   |6     |
+|www.fedsfm.ru     |5   |1     |
+|www.ikea.com      |4   |4     |
+|riafan.ru         |4   |4     |
++------------------+----+------+

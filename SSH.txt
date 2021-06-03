@@ -1,0 +1,103 @@
+ssh made21q1_nechaeva@brain-client3.bigdatateam.org -L 50070:brain-master.bigdatateam.org:50070
+
+
+
+http://localhost:50070/
+
+
+sudo -i -u mail_2021q1
+
+
+zip -r MADEBD2021Q1_Nechaeva_Violetta_HW8.zip ./hw08/*
+
+
+hdfs dfs -cat /data/ids_part/partA_1.txt | ./mapper.py | sort | ./reducer.py
+hdfs dfs -cat /data/stackexchange_part/posts/* | ./mapper.py | sort | ./reducer.py
+
+scp made21q1_nechaeva@brain-client3.bigdatateam.org:MADEBD2021Q1_Nechaeva_Violetta_HW8.zip ./
+
+
+hive -f task_Nechaeva_Violetta_ddl.hql
+
+hive -e "use made21q1_nechaeva; select * from ip_regions;"
+
+
+PYSPARK_DRIVER_PYTHON=jupyter \
+PYSPARK_PYTHON=python3.6 \
+PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --ip=0.0.0.0 --port=10501' \
+pyspark --conf spark.ui.port=10601 --driver-memory 512m --master yarn --num-executors 2 --executor-cores 1
+
+
+
+PYSPARK_DRIVER_PYTHON=python3.6 PYSPARK_PYTHON=python3.6 spark-submit "task_Nechaeva_Violetta_sssp.py"
+
+
+
+PYSPARK_DRIVER_PYTHON=jupyter \
+PYSPARK_PYTHON=python3.6 \
+PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --port=21568' \
+pyspark --conf spark.ui.port=21668 --driver-memory 512m --master yarn \
+--num-executors 2 --executor-cores 1
+
+
+ssh -A made21q1_nechaeva@brain-client3.bigdatateam.org -L \
+50070:brain-master.bigdatateam.org:50070 -L \
+8088:brain-master.bigdatateam.org:8088 -L \
+19888:brain-master.bigdatateam.org:19888 -L \
+18080:brain-master.bigdatateam.org:18080 -L \
+21568:localhost:21568 
+
+
+-----------------------------------------------------------------
+
+PYSPARK_DRIVER_PYTHON=jupyter \
+PYSPARK_PYTHON=python3.6 \
+PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --port=21568' \
+pyspark --conf spark.ui.port=21668 --driver-memory 512m --master yarn \
+--num-executors 2 --executor-cores 1 \
+--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0
+
+
+import pyspark.sql.functions as F
+from pyspark.sql.functions import col
+from pyspark.context import SparkContext
+from pyspark.sql.session import SparkSession
+sc = SparkContext('local')
+spark = SparkSession(sc)
+
+df = spark.read\
+.format("csv")\
+.option("sep", ",")\
+.options(header = True)\
+.load("hdfs:////data/movielens/movies.csv")
+
+
+PYSPARK_DRIVER_PYTHON=python3.6 PYSPARK_PYTHON=python3.6 spark-submit \
+--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 \
+"./hw08/task_Nechaeva_Violetta_domain_stat.py %cli_args%"
+
+
+python3 ./test.py --topic-name page_views --starting-offsets latest --processing-time "5 second" --kafka-brokers brain-node1.bigdatateam.org:9092,brain-node2.bigdatateam.org:9092,brain-node3.bigdatateam.org:9092
+
+
+python3 ./hw08/task_Nechaeva_Violetta_runet_stat.py --kafka-brokers brain-node2.bigdatateam.org:9092 --topic-name page_views
+
+
+PYSPARK_DRIVER_PYTHON=python3.6 PYSPARK_PYTHON=python3.6 spark-submit \
+--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 ./hw08/task_Nechaeva_Violetta_runet_stat.py \
+--topic-name page_views --starting-offsets latest --processing-time '5 second' \
+--kafka-brokers brain-node1.bigdatateam.org:9092,brain-node2.bigdatateam.org:9092,brain-node3.bigdatateam.org:9092
+
+
+pylint ./hw08/task_Nechaeva_Violetta_runet_stat.py -d invalid-name,missing-docstring:wq
+
+
+
+PYSPARK_DRIVER_PYTHON=python3.6 PYSPARK_PYTHON=python3.6 \
+spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0 ./hw08/task_Nechaeva_Violetta_domain_stat.py \
+--topic-name page_views --starting-offsets latest --processing-time '5 second' \
+--kafka-brokers brain-node1.bigdatateam.org:9092,brain-node2.bigdatateam.org:9092,brain-node3.bigdatateam.org:9092
+
+
+
+
