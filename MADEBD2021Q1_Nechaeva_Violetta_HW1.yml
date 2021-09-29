@@ -1,0 +1,71 @@
+beginner.how_many_items_in_hdfs:
+    stdin: "9"
+intermediate.hdfs_list_recursively:
+    stdin: "hdfs dfs -ls -R /data/wiki"
+intermediate.hdfs_list_recursively_human_readable:
+    stdin: "hdfs dfs -ls -R -h /data/wiki"
+intermediate.hdfs_file_replication_factor:
+    stdin: "3"
+intermediate.hdfs_folder_replication_factor:
+    stdin: "0"
+intermediate.hdfs_describe_size:
+    stdin: "actual"
+intermediate.hdfs_cumulative_size:
+    stdin: "hdfs dfs -du -s /data/wiki/"
+intermediate.hdfs_create_folder:
+    stdin: "hdfs dfs -mkdir madebd2021q1_Nechaeva.Violetta_68fc4dadeaa"
+intermediate.hdfs_create_nested_folder:
+    stdin: "hdfs dfs -mkdir -p madebd2021q1_Nechaeva.Violetta_68fc4dadeaa/one/two/three"
+intermediate.hdfs_remove_nested_folders:
+    stdin: "hdfs dfs -rm -R madebd2021q1_Nechaeva.Violetta_68fc4dadeaa"
+intermediate.hdfs_trash_behavior:
+    stdin: "hdfs dfs -rm -skipTrash"
+intermediate.hdfs_create_empty_file:
+    stdin: "hdfs dfs -touchz empty_file"
+intermediate.hdfs_create_small_file:
+    stdin: |-
+        touch v_nechaeva.txt
+        ls > v_nechaeva.txt
+        hdfs dfs -put v_nechaeva.txt
+intermediate.hdfs_output_file:
+    stdin: "hdfs dfs -cat v_nechaeva.txt"
+intermediate.hdfs_output_file_end:
+    stdin: "hdfs dfs -tail v_nechaeva.txt"
+intermediate.hdfs_output_file_start:
+    stdin: "hdfs dfs -cat v_nechaeva.txt | head"
+intermediate.hdfs_tail_vs_unix_tail:
+    stdin: "tail -c -1000 v_nechaeva.txt"
+intermediate.hdfs_copy_file:
+    stdin: "hdfs dfs -cp v_nechaeva.txt v_nechaeva_copy.txt"
+intermediate.hdfs_move_file:
+    stdin: |-
+        hdfs dfs -mkdir v_nechaeva_folder
+        hdfs dfs -mv v_nechaeva_copy.txt v_nechaeva_folder/v_nechaeva_copy.txt
+intermediate.hdfs_download_and_concatenate:
+    stdin: "hdfs dfs -getmerge v_nechaeva_folder/ v_nechaeva_merged.txt"
+advanced.hdfs_set_file_replication:
+    stdin: |-
+        hdfs dfs -setrep -w 4 v_nechaeva.txt
+        минут 20, репликация с фактором 4
+advanced.hdfs_get_files_and_block:
+    stdin: "hdfs fsck v_nechaeva_folder/ -files -blocks -locations"
+advanced.hdfs_get_block_information:
+    stdin: "hdfs fsck -blockId blk_1079538107"
+advanced.hdfs_dfs_architecture:
+    stdin: |-
+        provide your
+        multiline answer
+        here
+advanced.webhdfs_read_100B:
+    stdin: |-
+        curl -i 'http://brain-master:50070/webhdfs/v1/datasets/stop_words_en.txt?op=OPEN'
+        curl -i 'http://brain-node1.bigdatateam.org:50075/webhdfs/v1/datasets/stop_words_en.txt?op=OPEN&buffersize=10&namenoderpcaddress=brain-master.bigdatateam.org:8020&offset=0'
+advanced.webhdfs_curl_follow_redirects:
+    stdin: "curl -L 'http://brain-master:50070/webhdfs/v1/datasets/stop_words_en.txt?op=OPEN'"
+advanced.webhdfs_get_file_detailed_information:
+    stdin: "curl 'http://brain-master:50070/webhdfs/v1/datasets/stop_words_en.txt?op=GETFILESTATUS'"
+advanced.webhdfs_change_file_replication:
+    stdin: "curl 'http://brain-master:50070/webhdfs/v1/datasets/stop_words_en.txt?op=SETREPLICATION&replication=4'"
+advanced.webhdfs_append_to_file:
+    stdin: "curl -L POST -T test.txt 'http://brain-master:50070/webhdfs/v1/?op=APPEND'"
+
