@@ -1,0 +1,24 @@
+import logging
+
+logger = logging.getLogger("test_logger")
+
+formatter_message="%(asctime)s - %(levelname)s - %(filename)s:%(funcName)s:%(lineno)s - %(message)s",
+formatter_date="%d-%m-%Y %H:%M:%S"
+
+formatter = logging.Formatter(
+    fmt=formatter_message,
+    datefmt=formatter_date
+)
+
+# handler №1 - вывод аналогично print()
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setFormatter(formatter)
+stdout_handler.setLevel(logging.INFO)
+
+logging.basicConfig(
+    handlers=[stdout_handler],
+    format=formatter_message,
+    level=logging.DEBUG,
+    datefmt=formatter_date
+)
+logger.info("Начало логирования")
